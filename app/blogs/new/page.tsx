@@ -1,8 +1,10 @@
+import { createBlog } from "@/app/actions/notes"
+
 const NewBlog = () => {
     return (
         <div>
             <h2>Add a new blog</h2>
-            <form>
+            <form action={createBlog}>
                 <TextInput title="title" />
                 <TextInput title="author" />
                 <TextInput title="url" />
