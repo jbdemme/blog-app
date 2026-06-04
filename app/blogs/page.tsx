@@ -9,7 +9,7 @@ const Blogs = () => {
                 {blogs.map(blog => (
                     <li key={blog.id}>
                         <h4>{blog.title}</h4>
-                        {blog.author} ({blog.url})
+                        {blog.author} ({blog.url}) LIKES: {blog.likes}
                     </li>
                 ))}
             </ul>
