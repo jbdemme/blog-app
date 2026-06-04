@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getBlogs } from "../services/notes"
+import { getBlogs } from "../services/blogs"
 
 const Blogs = () => {
     const blogs = getBlogs()

@@ -1,4 +1,4 @@
-import { getBlogById } from "@/app/services/notes"
+import { getBlogById } from "@/app/services/blogs"
 import { notFound } from "next/navigation"
 
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
