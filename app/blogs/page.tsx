@@ -8,6 +8,10 @@ const Blogs = () => {
     return (
         <div>
             <h2>Blogs</h2>
+            <form>
+                <input type="text" name="search" />
+                <button type="submit">Search</button>
+            </form>
             <ul>
                 {blogs.map(blog => (
                     <li key={blog.id}>
