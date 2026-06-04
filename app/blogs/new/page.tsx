@@ -8,6 +8,7 @@ const NewBlog = () => {
                 <TextInput title="title" />
                 <TextInput title="author" />
                 <TextInput title="url" />
+                <button type="submit">Add Blog</button>
             </form>
         </div>
     )
