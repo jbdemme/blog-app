@@ -12,7 +12,11 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
     return (
         <div>
             <h2>{blog.title}</h2>
-            <p>Author: {blog.author}</p>
+            <p>
+                Author: {blog.author}
+                {" | "}
+                Likes: {blog.likes}
+            </p>
             <p>{blog.url}</p>
         </div>
     )
