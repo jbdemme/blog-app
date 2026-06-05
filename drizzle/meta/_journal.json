@@ -15,6 +15,13 @@
       "when": 1780670786416,
       "tag": "0001_puzzling_korath",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780688418012,
+      "tag": "0002_harsh_the_executioner",
+      "breakpoints": true
     }
   ]
 }
