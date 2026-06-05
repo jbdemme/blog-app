@@ -1,7 +1,7 @@
 import { getUsers } from "../services/users"
 
-const Users = () => {
-    const users = getUsers()
+const Users = async () => {
+    const users = await getUsers()
     return (
         <div>
             <h2>Users</h2>

@@ -1,16 +1,5 @@
-const users = [
-    {
-        id: 1,
-        username: "jsmith",
-        name: "Jonathan Smith"
-    },
-    {
-        id: 2,
-        username: "gegerion",
-        name: "George Tucker"
-    }
-]
+import { db } from "@/db"
 
-export const getUsers = () => {
-    return users
+export const getUsers = async () => {
+    return db.query.users.findMany()
 }
