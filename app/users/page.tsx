@@ -1,17 +1,7 @@
-const users = [
-    {
-        id: 1,
-        username: "jsmith",
-        name: "Jonathan Smith"
-    },
-    {
-        id: 2,
-        username: "gegerion",
-        name: "George Tucker"
-    }
-]
+import { getUsers } from "../services/users"
 
 const Users = () => {
+    const users = getUsers()
     return (
         <div>
             <h2>Users</h2>
