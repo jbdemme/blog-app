@@ -1,27 +1,35 @@
-import { createBlog } from "@/app/actions/blogs"
+"use client"
+
+import { createBlog, createState } from "@/app/actions/blogs"
+import React, { useActionState } from "react"
 
 const NewBlog = () => {
+    const [state, formAction] = useActionState(createBlog, {} as createState)
+
     return (
         <div>
             <h2>Add a new blog</h2>
-            <form action={createBlog}>
+            <form action={formAction}>
                 <div>
                     <label>
                         Title
-                        <input type="text" name="title" />
+                        <input type="text" name="title" defaultValue={state.values?.title} />
                     </label>
+                    {state.errors?.title && <p style={{ color: "red" }}>{state.errors.title}</p>}
                 </div>
                 <div>
                     <label>
                         Author
-                        <input type="text" name="author" />
+                        <input type="text" name="author" defaultValue={state.values?.author} />
                     </label>
+                    {state.errors?.author && <p style={{ color: "red" }}>{state.errors.author}</p>}
                 </div>
                 <div>
                     <label>
                         URL
-                        <input type="text" name="url" />
+                        <input type="text" name="url" defaultValue={state.values?.url} />
                     </label>
+                    {state.errors?.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
                 </div>
                 <button type="submit">Add Blog</button>
             </form>
