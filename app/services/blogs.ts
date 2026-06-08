@@ -21,7 +21,7 @@ export const addBlog = async (title: string, author: string, url: string, likes:
 
     await db
         .insert(blogs)
-        .values({ title, author, url, likes })
+        .values({ title, author, url, likes, userId: user.id })
 }
 
 export const increaseLike = async (id: number) => {

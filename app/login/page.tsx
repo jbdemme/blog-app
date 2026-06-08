@@ -12,6 +12,8 @@ export default function LoginPage() {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
 
+        console.log("credentials", formData)
+
         const result = await signIn("credentials", {
             username: formData.get("username"),
             password: formData.get("password"),
