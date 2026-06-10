@@ -1,9 +1,13 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 import bcrypt from "bcryptjs"
 import { db } from "../../db"
 import { users } from "../../db/schema"
+import { auth } from "@/auth"
+import { eq } from "drizzle-orm"
+import { getUserByUsername } from "../services/users"
 
 export type registerState = {
     errors?: {
@@ -43,4 +47,27 @@ export const registerUser = async (prevState: registerState, formData: FormData)
     }
 
     redirect("/login")
+}
+
+export const generateToken = async () => {
+    console.log("generating token on server")
+
+    const session = await auth()
+
+    if (!session?.user?.email) throw new Error("Not logged in")
+
+    const user = getUserByUsername(session?.user?.email)
+
+    if (!user) throw new Error("User not found")
+
+    const newToken = crypto.randomUUID()
+
+    console.log(newToken)
+
+    await db
+        .update(users)
+        .set({ token: newToken })
+        .where(eq(users.username, session.user.email))
+
+    revalidatePath("/me")
 }

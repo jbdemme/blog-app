@@ -1,6 +1,7 @@
 "use client"
 
 import { createBlog, createState } from "@/app/actions/blogs"
+import FormInput from "@/app/component/FormInput"
 import { useNotification } from "@/app/component/NotificationContext"
 import { useRouter } from "next/navigation"
 import React, { useActionState, useEffect } from "react"
@@ -25,21 +26,21 @@ const NewBlog = () => {
                 <div>
                     <label className="flex justify-between">
                         Title
-                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="title" defaultValue={state.values?.title} />
+                        <FormInput name="title" defaultValue={state.values?.title} />
                     </label>
                     {state.errors?.title && <p style={{ color: "red" }}>{state.errors.title}</p>}
                 </div>
                 <div>
                     <label className="flex justify-between">
                         Author
-                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="author" defaultValue={state.values?.author} />
+                        <FormInput name="author" defaultValue={state.values?.url} />
                     </label>
                     {state.errors?.author && <p style={{ color: "red" }}>{state.errors.author}</p>}
                 </div>
                 <div>
                     <label className="flex justify-between">
                         URL
-                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="url" defaultValue={state.values?.url} />
+                        <FormInput name="url" defaultValue={state.values?.url} />
                     </label>
                     {state.errors?.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
                 </div>

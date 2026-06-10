@@ -14,8 +14,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
             async authorize(credentials) {
 
-                console.log("credentials in auth", credentials)
-
                 if (!credentials?.username || !credentials?.password) {
                     return null
                 }
@@ -23,8 +21,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 const user = await db.query.users.findFirst({
                     where: eq(users.username, credentials.username as string),
                 })
-
-                console.log("user", user)
 
                 if (!user || !user.passwordHash) {
                     return null
@@ -34,8 +30,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     credentials.password as string,
                     user.passwordHash,
                 )
-
-                console.log("Valid?", isValid)
 
                 if (!isValid) {
                     return null
