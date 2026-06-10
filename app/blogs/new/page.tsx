@@ -1,37 +1,49 @@
 "use client"
 
 import { createBlog, createState } from "@/app/actions/blogs"
-import React, { useActionState } from "react"
+import { useNotification } from "@/app/component/NotificationContext"
+import { useRouter } from "next/navigation"
+import React, { useActionState, useEffect } from "react"
 
 const NewBlog = () => {
     const [state, formAction] = useActionState(createBlog, {} as createState)
 
+    const router = useRouter()
+    const { showNotification } = useNotification()
+
+    useEffect(() => {
+        if (state.success) {
+            showNotification("Created new blog", "success")
+            router.push("/blogs")
+        }
+    }, [state])
+
     return (
-        <div>
-            <h2>Add a new blog</h2>
-            <form action={formAction}>
+        <div className="flex items-center flex-col">
+            <h2 className="text-6xl mb-6">Add a new blog</h2>
+            <form action={formAction} className="flex flex-col gap-4 w-md">
                 <div>
-                    <label>
+                    <label className="flex justify-between">
                         Title
-                        <input type="text" name="title" defaultValue={state.values?.title} />
+                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="title" defaultValue={state.values?.title} />
                     </label>
                     {state.errors?.title && <p style={{ color: "red" }}>{state.errors.title}</p>}
                 </div>
                 <div>
-                    <label>
+                    <label className="flex justify-between">
                         Author
-                        <input type="text" name="author" defaultValue={state.values?.author} />
+                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="author" defaultValue={state.values?.author} />
                     </label>
                     {state.errors?.author && <p style={{ color: "red" }}>{state.errors.author}</p>}
                 </div>
                 <div>
-                    <label>
+                    <label className="flex justify-between">
                         URL
-                        <input type="text" name="url" defaultValue={state.values?.url} />
+                        <input className="bg-white rounded-lg w-60 text-black px-2" type="text" name="url" defaultValue={state.values?.url} />
                     </label>
                     {state.errors?.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
                 </div>
-                <button type="submit">Add Blog</button>
+                <button type="submit" className="rounded bg-cyan-800 max-w-32 ">Add Blog</button>
             </form>
         </div>
     )

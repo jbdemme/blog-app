@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <div>
-      <h2>This is the example blog application.</h2>
+    <div className="px-2 py-8">
+      <h2 className="text-8xl text-white tracking-tighter text-balance mb-8">
+        This is the example blog app.
+      </h2>
       <p>
         This blog application is part of the exercises of
         the mooc.fi full stack course on next.js. I highly

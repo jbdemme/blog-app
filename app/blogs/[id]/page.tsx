@@ -11,18 +11,19 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
     }
 
     return (
-        <div>
-            <h2>{blog.title}</h2>
-            <p>
-                Author: {blog.author}
-                {" | "}
-                Likes: {blog.likes}
+        <div className="p-4 space-y-4">
+            <h2 className="text-6xl tracking-tighter text-balance mb-4">{blog.title}</h2>
+            <p className="text-foreground/50 mb-4">
+                Author: <em>{blog.author}</em>
             </p>
             <p>{blog.url}</p>
-            <form action={likeBlog}>
-                <input type="hidden" name="id" value={blog.id} />
-                <button type="submit">Like {"<3"}</button>
-            </form>
+            <div className="flex items-center gap-12">
+                {blog.likes} Likes
+                <form action={likeBlog}>
+                    <input type="hidden" name="id" value={blog.id} />
+                    <button type="submit" className="bg-cyan-600 rounded px-2 py-1 font-bold">LIKE</button>
+                </form>
+            </div>
         </div>
     )
 }
