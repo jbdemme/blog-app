@@ -1,21 +1,14 @@
-import { auth } from "@/auth"
 import { redirect } from "next/navigation"
-import { getUserByUsername } from "../services/users"
-import { useNotification } from "../component/NotificationContext"
 import TokenButton from "../component/TokenButton"
+import ReadingList from "./ReadingList"
+import { getCurrentUser } from "../services/session"
 
 const ProfilePage = async () => {
-    const session = await auth()
+    const user = await getCurrentUser()
 
-    if (!session || !session.user || !session.user.email) {
-        redirect("/login")
-    }
+    if (!user) redirect("/login")
 
-    const user = await getUserByUsername(session.user.email)
 
-    if (!user) {
-        redirect("/login")
-    }
 
     return (
         <div className="bg-mist-800 max-w-2xl mx-auto m-12 p-6 space-y-6">
@@ -37,6 +30,8 @@ const ProfilePage = async () => {
                 </div>
             }
             <TokenButton />
+            <hr />
+            <ReadingList />
         </div>
     )
 }

@@ -4,7 +4,8 @@ import { redirect } from "next/navigation"
 import { addBlog, increaseLike } from "../services/blogs"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
-import { errorToJSON } from "next/dist/server/render"
+import { getCurrentUser } from "../services/session"
+import { addReadingList, markBlogRead } from "../services/readingList"
 
 export type createState = {
     errors?: {
@@ -67,4 +68,20 @@ export const likeBlog = async (formData: FormData) => {
 
     revalidatePath(`/blogs/${id}`)
     revalidatePath("/blogs")
+}
+
+export const addToReadingList = async (formData: FormData) => {
+    const blogId = Number(formData.get("id"))
+    const user = await getCurrentUser()
+    if (!user) redirect("/login")
+    await addReadingList(blogId, user.id)
+    revalidatePath("/me")
+}
+
+export const markRead = async (formData: FormData) => {
+    const blogId = Number(formData.get("id"))
+    const user = await getCurrentUser()
+    if (!user) redirect("/login")
+    await markBlogRead(blogId, user.id)
+    revalidatePath("/me")
 }

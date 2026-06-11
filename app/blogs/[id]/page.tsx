@@ -1,4 +1,4 @@
-import { likeBlog } from "@/app/actions/blogs"
+import { addToReadingList, likeBlog } from "@/app/actions/blogs"
 import { getBlogById } from "@/app/services/blogs"
 import { notFound } from "next/navigation"
 
@@ -21,7 +21,15 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
                 {blog.likes} Likes
                 <form action={likeBlog}>
                     <input type="hidden" name="id" value={blog.id} />
-                    <button type="submit" className="bg-cyan-600 rounded px-2 py-1 font-bold">LIKE</button>
+                    <button type="submit" className="bg-cyan-600 rounded px-2 py-1 font-bold text-white hover:bg-cyan-700 cursor-pointer">
+                        LIKE
+                    </button>
+                </form>
+                <form action={addToReadingList}>
+                    <input type="hidden" name="id" value={blog.id} />
+                    <button type="submit" className="bg-amber-400 hover:bg-amber-500 rounded px-2 py-1 font-bold text-gray-800 cursor-pointer">
+                        Add to reading list
+                    </button>
                 </form>
             </div>
         </div>

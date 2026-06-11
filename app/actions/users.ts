@@ -8,6 +8,7 @@ import { users } from "../../db/schema"
 import { auth } from "@/auth"
 import { eq } from "drizzle-orm"
 import { getUserByUsername } from "../services/users"
+import { getCurrentUser } from "../services/session"
 
 export type registerState = {
     errors?: {
@@ -50,15 +51,9 @@ export const registerUser = async (prevState: registerState, formData: FormData)
 }
 
 export const generateToken = async () => {
-    console.log("generating token on server")
+    const user = await getCurrentUser()
 
-    const session = await auth()
-
-    if (!session?.user?.email) throw new Error("Not logged in")
-
-    const user = getUserByUsername(session?.user?.email)
-
-    if (!user) throw new Error("User not found")
+    if (!user) redirect("/login")
 
     const newToken = crypto.randomUUID()
 
@@ -67,7 +62,7 @@ export const generateToken = async () => {
     await db
         .update(users)
         .set({ token: newToken })
-        .where(eq(users.username, session.user.email))
+        .where(eq(users.username, user.username))
 
     revalidatePath("/me")
 }
