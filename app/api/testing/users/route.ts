@@ -1,8 +1,9 @@
 import { db } from "@/db"
 import { users } from "@/db/schema"
-import { NextResponse } from "next/server"
+import bcrypt from "bcryptjs"
+import { NextRequest, NextResponse } from "next/server"
 
-export const POST = async () => {
+export const POST = async (req: NextRequest) => {
 
     if (process.env.NODE_ENV === 'production') {
         return NextResponse.json(
@@ -10,14 +11,18 @@ export const POST = async () => {
             { status: 403 }
         )
     }
+    const { username, name, password } = await req.json()
 
-    const testUser = {
-        "username": "testuser",
-        "name": "Test User",
-        "password": "testpass123"
+    if (!username || !name || !password) {
+        return NextResponse.json(
+            { error: "New user must be in the request content" },
+            { status: 400 }
+        )
     }
 
-    await db.insert(users).values(testUser)
+    const passwordHash = await bcrypt.hash(password, 10)
 
-    return NextResponse.json(testUser, { status: 201 })
+    await db.insert(users).values({ username, name, passwordHash })
+
+    return NextResponse.json({ message: "user added" }, { status: 201 })
 }
