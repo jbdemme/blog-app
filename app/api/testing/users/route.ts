@@ -18,4 +18,6 @@ export const POST = async () => {
     }
 
     await db.insert(users).values(testUser)
+
+    return NextResponse.json(testUser, { status: 201 })
 }
