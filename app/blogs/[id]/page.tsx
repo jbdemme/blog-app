@@ -12,12 +12,14 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
 
     return (
         <div className="p-4 space-y-4">
-            <h2 className="text-6xl tracking-tighter text-balance mb-4">{blog.title}</h2>
-            <p className="text-foreground/50 mb-4">
+            <h2 className="text-6xl tracking-tighter text-balance mb-4" data-testid="blog-title">
+                {blog.title}
+            </h2>
+            <p className="text-foreground/50 mb-4" data-testid="blog-author">
                 Author: <em>{blog.author}</em>
             </p>
             <p>{blog.url}</p>
-            <div className="flex items-center gap-12">
+            <div className="flex items-center gap-12" data-testid="blog-detail">
                 {blog.likes} Likes
                 <form action={likeBlog}>
                     <input type="hidden" name="id" value={blog.id} />
@@ -27,7 +29,11 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </form>
                 <form action={addToReadingList}>
                     <input type="hidden" name="id" value={blog.id} />
-                    <button type="submit" className="bg-amber-400 hover:bg-amber-500 rounded px-2 py-1 font-bold text-gray-800 cursor-pointer">
+                    <button
+                        type="submit"
+                        data-testid="add-to-reading-list-button"
+                        className="bg-amber-400 hover:bg-amber-500 rounded px-2 py-1 font-bold text-gray-800 cursor-pointer"
+                    >
                         Add to reading list
                     </button>
                 </form>

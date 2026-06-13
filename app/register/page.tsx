@@ -15,7 +15,14 @@ const RegisterPage = () => {
                         Username
                         <input type="text" name="username" required />
                     </label>
-                    {state.errors?.username && <p style={{ color: "red" }}>{state.errors.username}</p>}
+                    {state.errors?.username &&
+                        <p
+                            className="text-red-500"
+                            data-testid="username-error"
+                        >
+                            {state.errors.username}
+                        </p>
+                    }
                 </div>
                 <div>
                     <label>
@@ -28,17 +35,38 @@ const RegisterPage = () => {
                         Password
                         <input type="password" name="password" required />
                     </label>
-                    {state.errors?.password && <p style={{ color: "red" }}>{state.errors.password}</p>}
+                    {state.errors?.password &&
+                        <p
+                            className="test-red-500"
+                            data-testid="password-error"
+                        >
+                            {state.errors.password}
+                        </p>
+                    }
                 </div>
                 <div>
                     <label>
-                        Password (repeated)
+                        Confirm Password
                         <input type="password" name="password-confirm" required />
                     </label>
-                    {state.errors?.passwordConfirm && <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>}
+                    {state.errors?.passwordConfirm &&
+                        <p
+                            className="test-red-500"
+                            data-testid="passwordConfirm-error"
+                        >
+                            {state.errors.passwordConfirm}
+                        </p>
+                    }
                 </div>
-                <button type="submit">Register</button>
-                {state.errors?.general && <p style={{ color: "red" }}>{state.errors.general}</p>}
+                <button type="submit" data-testid="register-button">Register</button>
+                {state.errors?.general &&
+                    <p
+                        className="text-red-500"
+                        data-testid="register-error"
+                    >
+                        {state.errors.general}
+                    </p>
+                }
             </form>
         </div>
     )

@@ -44,7 +44,9 @@ const NewBlog = () => {
                     </label>
                     {state.errors?.url && <p style={{ color: "red" }}>{state.errors.url}</p>}
                 </div>
-                <button type="submit" className="rounded bg-cyan-800 max-w-32 ">Add Blog</button>
+                <button type="submit" data-testid="create-blog-button" className="rounded bg-cyan-800 max-w-32">
+                    Create
+                </button>
             </form>
         </div>
     )
