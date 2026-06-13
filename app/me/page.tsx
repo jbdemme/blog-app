@@ -13,8 +13,12 @@ const ProfilePage = async () => {
     return (
         <div className="bg-mist-800 max-w-2xl mx-auto m-12 p-6 space-y-6">
             <h2 className="font-bold text-2xl">My Profile</h2>
-            <p><strong>Name:</strong> {user?.name}</p>
-            <p><strong>Username:</strong> {user?.username}</p>
+            <p data-testid="user-name">
+                <strong>Name:</strong> {user?.name}
+            </p>
+            <p data-testid="user-username">
+                <strong>Username:</strong> {user?.username}
+            </p>
             <hr />
             <h2 className="font-bold text-2xl">API Token</h2>
             {user.token ?
