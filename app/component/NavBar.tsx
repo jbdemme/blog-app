@@ -14,8 +14,8 @@ export default function NavBar() {
                 <span className="font-light">App</span>
             </div>
             <NavLink href="/">Home</NavLink>
-            <NavLink href="/blogs">Blogs</NavLink>
-            <NavLink href="/users">Users</NavLink>
+            <NavLink href="/blogs">blogs</NavLink>
+            <NavLink href="/users">users</NavLink>
             <div className="ml-auto flex items-center gap-4">
                 {session ? (
                     <>
