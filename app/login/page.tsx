@@ -4,26 +4,26 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import FormInput from "../component/FormInput"
+import { useNotification } from "../component/NotificationContext"
 
 export default function LoginPage() {
     const router = useRouter()
     const [error, setError] = useState("")
+    const { showNotification } = useNotification()
 
     const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
 
-        console.log("credentials", formData)
+        const username = formData.get("username")
+        const password = formData.get("password")
 
-        const result = await signIn("credentials", {
-            username: formData.get("username"),
-            password: formData.get("password"),
-            redirect: false,
-        })
+        const result = await signIn("credentials", { username, password, redirect: false })
 
         if (result?.error) {
             setError("Invalid username or password")
         } else {
+            showNotification(`Logged in as ${username}`, "success")
             router.push("/")
             router.refresh()
         }
