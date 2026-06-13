@@ -17,7 +17,7 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ q?: string }> }
                 <input type="text" name="q" className="grow border border-white rounded-lg bg-gray-950 px-2" />
                 <button type="submit" className="bg-cyan-600 p-2 rounded-lg focus:shadow-outline hover:bg-cyan-800">Search</button>
             </form>
-            <ul className="space-y-2">
+            <ul className="space-y-2" data-testid="blog-list">
                 {blogs.map(blog => (
                     <li key={blog.id} className="p-3 full-w hover:bg-mist-900">
                         <p className="mb-3">
