@@ -448,7 +448,7 @@ test.describe("Blog Application", () => {
       expect(token!.length).toBeGreaterThan(10)
     })
 
-    test.only("can regenerate API token", async ({ page }) => {
+    test("can regenerate API token", async ({ page }) => {
       await loginUser(page, "testuser", "testpass123")
       await page.goto("/me")
 
