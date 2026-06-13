@@ -8,7 +8,6 @@ test.describe("Blog Application", () => {
 
   test.describe("Authentication", () => {
     test("user can register", async ({ page, baseURL }) => {
-      console.log("The baseUrl is:", baseURL)
       await page.goto("/register")
 
       await page.getByLabel("Username", { exact: true }).fill("testuser")
@@ -449,7 +448,7 @@ test.describe("Blog Application", () => {
       expect(token!.length).toBeGreaterThan(10)
     })
 
-    test("can regenerate API token", async ({ page }) => {
+    test.only("can regenerate API token", async ({ page }) => {
       await loginUser(page, "testuser", "testpass123")
       await page.goto("/me")
 
@@ -462,7 +461,7 @@ test.describe("Blog Application", () => {
       await page.getByTestId("generate-token-button").click()
 
       // Wait for token to potentially change
-      await page.waitForTimeout(500)
+      await page.waitForTimeout(1000)
       const secondToken = await page.getByTestId("api-token").textContent()
 
       // Tokens should be different

@@ -29,7 +29,11 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </form>
                 <form action={addToReadingList}>
                     <input type="hidden" name="id" value={blog.id} />
-                    <button type="submit" className="bg-amber-400 hover:bg-amber-500 rounded px-2 py-1 font-bold text-gray-800 cursor-pointer">
+                    <button
+                        type="submit"
+                        data-testid="add-to-reading-list-button"
+                        className="bg-amber-400 hover:bg-amber-500 rounded px-2 py-1 font-bold text-gray-800 cursor-pointer"
+                    >
                         Add to reading list
                     </button>
                 </form>

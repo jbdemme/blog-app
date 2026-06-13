@@ -8,6 +8,7 @@ const TokenButton = () => {
             <button
                 className="bg-cyan-500 rounded py-2 px-4 hover:bg-cyan-600 cursor-pointer"
                 type="submit"
+                data-testid="generate-token-button"
             >
                 Generate new Token
             </button>

@@ -17,7 +17,10 @@ export const BlogList = ({ blogs }: { blogs: { id: number, title: string, read: 
                     </Link>
                     {!blog.read && <form action={markRead}>
                         <input type="hidden" name="id" value={blog.id} />
-                        <button className="px-2 rounded bg-amber-400 hover:bg-amber-500 text-black cursor-pointer">
+                        <button
+                            data-testid="mark-read-button"
+                            className="px-2 rounded bg-amber-400 hover:bg-amber-500 text-black cursor-pointer"
+                        >
                             mark as read
                         </button>
                     </form>}
